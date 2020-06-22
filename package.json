@@ -1,0 +1,23 @@
+{
+  "name": "castaway-cash",
+  "version": "1.0.0",
+  "description": "Castaway Cash is a 3 from 9 instant win game",
+  "main": "src/index/js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://rygibson@bitbucket.org/rygibson/iwg_test.git"
+  },
+  "author": "Ry",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/rygibson/iwg_test#readme",
+  "dependencies": {
+    "pixi-sound": "^3.0.4",
+    "pixi.js": "^5.3.0"
+  },
+  "devDependencies": {
+    "webpack": "^4.43.0"
+  }
+}

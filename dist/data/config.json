@@ -1,0 +1,56 @@
+{
+	"config": {
+        "viewData":{
+
+            "mainGame":{
+                "x":-1024,
+                "y":-640,
+                "scale":{"x":2,"y":2}
+            },
+
+            "gameBackground" :[
+                { "key":"waterRipple.png","properties":{"x":220,"y":540,"scale":{"x":1.25,"y":1.25}}},
+                { "key":"islandMiddle.png","properties":{"x":420,"y":330}},
+                { "key":"islandForeground.png","properties":{"x":0,"y":900}},
+                { "key":"logo.psd","properties":{"x":876,"y":329}},
+                { "key":"winUpTo.psd","properties":{"x":918,"y":476}}
+            ],
+            "gameForeground":[
+                { "key":"bushesL.png","properties":{"x":30,"y":580,"scale":{"x":2,"y":2}}},
+                { "key":"bushesR.png","properties":{"x":1450,"y":580,"scale":{"x":2,"y":2}}},
+                { "key":"palmL.png","properties":{"x":-60,"y":30}},
+                { "key":"palmR.png","properties":{"x":1220,"y":-50}},
+                { "key":"instructionGame01.psd","properties":{"x":415,"y":905}}
+            ],
+            "UI":{
+                "setBet":[
+                    { "key":"panelVS3.png","properties":{"x":0,"y":712}},
+                    { "key":"panelVS2.png","properties":{"x":0,"y":492}},
+                    { "key":"panelVS1.png","properties":{"x":0,"y":0}},
+                    { "key":"chooseBet.psd","properties":{"x":-5,"y":370}}
+                ],
+                "revealAll":[
+                    { "key":"panelRevealAll.png","properties":{"x":0,"y":0}}
+                ],
+                "gameComplete":[
+                    {"key":"panelEndMessage.psd","properties":{"x":0,"y":0}},
+                    {"key":"winMessage.psd","properties":{"x":0,"y":330, "visible":false}},
+                    {"key":"loseMessage.psd","properties":{"x":0,"y":330,"visible":false}}
+                ]
+            },
+
+            "chestData":[
+                {"x":650,"y":615},
+                {"x":840,"y":615},
+                {"x":1035,"y":615},
+                {"x":1215,"y":615},
+                {"x":650,"y":775},
+                {"x":850,"y":775},
+                {"x":1035,"y":775},
+                {"x":1215,"y":775},
+                {"x":1400,"y":775}
+
+            ]
+        }
+    }
+}
