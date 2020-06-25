@@ -5,6 +5,9 @@ import ConfigData from './engine/config_data.js';
 import {Game} from './views/game.js';
 import {UI} from './views/ui.js';
 
+
+
+
 class Main{
 	constructor() {
 		console.log('Main');
@@ -30,7 +33,7 @@ class Main{
 		
 		this.tState = new PIXI.Text('');
 		this.tState.x = 5;
-		this.tState.y = 5;
+		this.tState.y = -250;
 		this.oApp.stage.addChild(this.tState);
 
 		this.eStateEnums = {
@@ -48,6 +51,8 @@ class Main{
 		this.sState = this.eStateEnums.sLoading;
 		this.oApp.ticker.add(this.loop.bind(this));
 		
+		
+
 	}
 
 	onEngineInit(){

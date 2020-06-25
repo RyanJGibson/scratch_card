@@ -14,7 +14,11 @@ class UI{
         this.nCurrentStakeIndex = 0;
         this.nCurrentStake = this.aPricePoints[this.nCurrentStakeIndex];
 
-        
+        //tween vars
+        this.nYHidePos = -800;
+        this.nTweenDuration = 0.8;
+        this.nDownDelay = 0.6;
+        this.nUpDelay = 0.0;
     }
 
     initEventHanders(fOnNewGame, fOnShowStake, fOnReplay, fOnRevealAll){
@@ -28,8 +32,7 @@ class UI{
     initScreens(){
         this.initSetBet();
         this.initRevealAll();
-        this.initGameComplete();
-
+        this.initGameComplete()
     }
 
 
@@ -45,12 +48,12 @@ class UI{
         this.cSetBet.x = 516;
 
 
-        this.oPlusButton = new ButtonUtil('plus.png','plusHighlight.png', this.onStakeInc.bind(this));
+        this.oPlusButton = new ButtonUtil('plus.png','plusHighlight.png', this.onStakeInc.bind(this), 5,5);
         this.oPlusButton.x = 215;
         this.oPlusButton.y = 590;
         this.cSetBet.addChild(this.oPlusButton);
 
-        this.oMinusButton = new ButtonUtil('minus.png','minusHighlight.png', this.onStakeDec.bind(this));
+        this.oMinusButton = new ButtonUtil('minus.png','minusHighlight.png', this.onStakeDec.bind(this), 5, 5);
         this.oMinusButton.x = 35;
         this.oMinusButton.y = 620;
         this.cSetBet.addChild(this.oMinusButton);
@@ -66,7 +69,9 @@ class UI{
 		this.cSetBet.addChild(this.tStake);
 
         this.cSetBet.visible = false;
-
+        this.updateStakeField();
+        this.cSetBet.y = this.nYHidePos;
+        
     }
 
     onStakeInc(){
@@ -113,7 +118,8 @@ class UI{
         this.oRevealAllButton.y = 368;
         this.cRevealAll.addChild(this.oRevealAllButton);
 
-        this.cRevealAll.visible = false;
+        //this.cRevealAll.visible = false;
+        this.cRevealAll.y = this.nYHidePos;
     }
 
     initGameComplete(){
@@ -152,12 +158,21 @@ class UI{
         this.oChooseBetButton.y = 450;
         this.cGameComplete.addChild(this.oChooseBetButton);
 
-        this.cGameComplete.visible = false;
+        //this.cGameComplete.visible = false;
+        this.cGameComplete.y = this.nYHidePos;
     }
 
 
     showSetBet(){
         this.cSetBet.visible = true;
+        this.cSetBet.y = this.nYHidePos;
+ 
+        
+        TweenMax.to(this.cSetBet, this.nTweenDuration, 
+            {y:0,
+            delay:this.nDownDelay,
+            ease:"back.out"
+		});
     }
     disableSetBetButton(){
         this.oPlayButton.disableButton();
@@ -169,14 +184,39 @@ class UI{
         this.updateStakeField();
     }
     hideSetBet(){
-        this.cSetBet.visible = false;
+        //this.cSetBet.visible = false;
+        if(this.cSetBet.y < -1){
+            return; //ignore command to hide if already hidden
+        }
+
+        this.cSetBet.y = 0;
+        
+        TweenMax.to(this.cSetBet, this.nTweenDuration, 
+            {y:this.nYHidePos,
+            delay:this.nUpDelay,
+            ease:"back.in"
+		});
     }
 
     showRevealAll(){
-        this.cRevealAll.visible = true;
+        //this.cRevealAll.visible = true;
+        this.cRevealAll.y = this.nYHidePos;
+        
+        TweenMax.to(this.cRevealAll, this.nTweenDuration, 
+            {y:0,
+            delay:this.nDownDelay,
+            ease:"back.out"
+		});
     }
     hideRevealAll(){
-        this.cRevealAll.visible = false;
+        //this.cRevealAll.visible = false;
+        this.cRevealAll.y = 0;
+        
+        TweenMax.to(this.cRevealAll, this.nTweenDuration, 
+            {y:this.nYHidePos,
+            delay:this.nUpDelay,
+            ease:"back.in"
+		});
     }
     
     disableRevealAllButton(){
@@ -187,10 +227,17 @@ class UI{
     }
 
     showGameComplete(nPrize){
-
         setTimeout( 
             function() {
-                this.cGameComplete.visible = true;
+                //this.cGameComplete.visible = true;
+                this.cGameComplete.y = this.nYHidePos;
+                
+                TweenMax.to(this.cGameComplete, this.nTweenDuration, 
+                    {y:0,
+                    delay:this.nDownDelay,
+                    ease:"back.out"
+                });
+
                 this.sprWinMessage.visible = false;
                 this.sprLoseMessage.visible = false;
                 this.tWin.visible = false;
@@ -208,7 +255,20 @@ class UI{
 
     }
     hideGameComplete(){
-        this.cGameComplete.visible = false;
+        //this.cGameComplete.visible = false;
+
+        if(this.cGameComplete.y < -1){
+            return; //ignore command to hide if already hidden
+        }
+
+        this.cGameComplete.y = 0;
+        
+        TweenMax.to(this.cGameComplete, this.nTweenDuration, 
+            {y:this.nYHidePos,
+            delay:this.nUpDelay,
+            ease:"back.in"
+        });
+        
     }
     disableGameCompleteButtons(){
         this.oPlayAgainButton.disableButton();

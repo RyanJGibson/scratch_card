@@ -19,26 +19,22 @@ class Chest{
         }
 
 
+        this.cChestContainer = new PIXI.Container();
+        this.cMainContainer.addChild(this.cChestContainer);
 
-        this.oChestContainer = new PIXI.Container();
-        this.cMainContainer.addChild(this.oChestContainer);
-
-       /*
-
-       */
         
 
         this.sprChest = new PIXI.AnimatedSprite(aTextures);
-        this.sprChest.animationSpeed = 2; 
+        this.sprChest.animationSpeed = 1; 
         this.sprChest.loop = false;
         console.log(this.sprChest);
         this.sprChest.onComplete = () => this.onAnimCommplete();
         //sprChest.play();
-        this.oChestContainer.addChild(this.sprChest);
-        this.oChestContainer= Object.assign(this.oChestContainer, ConfigData.oConfigData.config.viewData.chestData[nID]);
+        this.cChestContainer.addChild(this.sprChest);
+        this.cChestContainer= Object.assign(this.cChestContainer, ConfigData.oConfigData.config.viewData.chestData[nID]);
 
         this.sprGlow = PIXI.Sprite.from("chestGlow.png");
-        this.oChestContainer.addChild(this.sprGlow);
+        this.cChestContainer.addChild(this.sprGlow);
         this.sprGlow.anchor.x =0.5;
         this.sprGlow.anchor.y =0.5;
         this.sprGlow.y = -20;
@@ -50,20 +46,30 @@ class Chest{
 		this.tPrizeGray.x = 0;
         this.tPrizeGray.y = -70;
         this.tPrizeGray.anchor.x = 0.5;
-        this.oChestContainer.addChild(this.tPrizeGray);
+        this.cChestContainer.addChild(this.tPrizeGray);
 
         this.tPrize = new PIXI.BitmapText(aPrize[parseInt(Math.random()*aPrize.length)], { font: '40px skranji-yellow-export', align: 'center' });
 		this.tPrize.x = 0;
         this.tPrize.y = -70;
         this.tPrize.anchor.x = 0.5;
-        this.oChestContainer.addChild(this.tPrize);        
+        this.cChestContainer.addChild(this.tPrize);        
 
         this.sprChest.anchor.x =0.5;
         this.sprChest.anchor.y =0.5;
-        this.sprChest.rotation = (Math.random()/10) - 0.05;
+        this.cChestContainer.rotation = ((Math.random()) - 0.5)*0.2;
 
-        this.sprChest.interactive = true;
-        this.sprChest.on('pointerdown', this.onChestSelected.bind(this));
+        const gButton = new PIXI.Graphics();
+		gButton.beginFill(0xFF0000);
+		gButton.drawRect(-80, -35, 160, 130);
+        gButton.endFill();
+        gButton.alpha = 0;
+        this.cChestContainer.addChild(gButton)
+        gButton.interactive = true;
+
+        gButton.on('pointerdown', this.onChestSelected.bind(this));
+        gButton.on('pointerover', this.onChestOver.bind(this));
+        gButton.on('pointerout', this.onChestOut.bind(this));
+        
 
         this.resetChest();
     }
@@ -100,11 +106,23 @@ class Chest{
         this.tPrize.visible = true;
     }
 
+    
+    onChestOver(){
+        if(this.bSelectable && !this.bOpen){
+            this.sprChest.gotoAndStop(5);
+        }
+    }
+    onChestOut(){
+        if(this.bSelectable && !this.bOpen){
+            this.sprChest.gotoAndStop(0);
+        }
+    }
+    
     onChestSelected(){
         console.log('onChestSelected: ' + this.nID + " " + this.bSelectable);
         if(this.bSelectable && !this.bOpen){
             this.bOpen = true;
-            this.sprChest.play();
+            this.sprChest.gotoAndPlay(15);
 
             let resources = PIXI.Loader.shared.resources;
             resources.SND_Chest_Open.sound.play();

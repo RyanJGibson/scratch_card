@@ -14,6 +14,7 @@
   "license": "ISC",
   "homepage": "https://bitbucket.org/rygibson/iwg_test#readme",
   "dependencies": {
+    "gsap": "^3.3.4",
     "pixi-sound": "^3.0.4",
     "pixi.js": "^5.3.0"
   },

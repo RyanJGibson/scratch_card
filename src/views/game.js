@@ -26,6 +26,31 @@ class Game{
         this.oGameForeground = new GameForeground(this.cForeground);
 
         this.initChests();
+
+/*
+        TweenMax.to(this.cBackground, 5, 
+            {y:-5,
+            yoyo:true,
+            ease:"sine.inOut",
+            repeat:-1,
+        });
+        
+        TweenMax.to(this.cMainGame, 5, 
+            {y:-5,
+            yoyo:true,
+            ease:"sine.inOut",
+            repeat:-1,
+        });*/
+
+        TweenMax.to(this.cForeground, 3, 
+            {y:20,
+            yoyo:true,
+            ease:"sine.inOut",
+            repeat:-1,
+            delay:1
+        });
+
+
     }
 
     initEventHanders(fOnGameComplete){
